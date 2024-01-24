@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-
+using System.Data;
 
 string mensagemDeBoasVindas = "Boas vindas ao Screen Sound";
 // List<string> listaDasBandas = new List<string>();
@@ -40,10 +38,10 @@ void ExibirOpcoesDoMenu()
         case 2: MostrarBandasRegistradas();
             break;
 
-        case 3: Console.WriteLine("Você escolheu a opção " + opcaoEscolhidaNumerica);
+        case 3: AvaliarUmaBanda();
             break;
 
-        case 4: Console.WriteLine("Você escolheu a opção " + opcaoEscolhidaNumerica);
+        case 4: ExibirMediaDeBanda();
             break;
 
         case -1: Console.WriteLine("Programa encerrado com sucesso. Até mais.");
@@ -100,99 +98,61 @@ void ExibirTituloDaOpcao (string titulo)
     Console.WriteLine(asteriscos + "\n");
 }
 
-
-
-
-
-/*  AQUIII */
-
-
-
-/*
-Console.Write("Digite o primeiro número: ");
-int primeiroNumero = int.Parse(Console.ReadLine()!);
-Console.Write("Digite o segundo número: ");
-int segundoNumero = int.Parse(Console.ReadLine()!);
-
-void Operacoes()
+void AvaliarUmaBanda()
 {
-    Console.WriteLine($"A soma entre {primeiroNumero} e {segundoNumero} é {primeiroNumero + segundoNumero}");
-    Console.WriteLine($"A subtração entre {primeiroNumero} e {segundoNumero} é {primeiroNumero - segundoNumero}");
-    Console.WriteLine($"A multiplicação entre {primeiroNumero} e {segundoNumero} é {primeiroNumero * segundoNumero}");
-    Console.WriteLine($"A divisão entre {primeiroNumero} e {segundoNumero} é {primeiroNumero / segundoNumero}");
-}
-
-Operacoes();
-
-
-List<int> listaDeNumeros = new List<int>();
-listaDeNumeros.Add(1);
-listaDeNumeros.Add(10);
-listaDeNumeros.Add(100);
-listaDeNumeros.Add(1000);
-listaDeNumeros.Add(10000);
-int soma = 0;
-
-void SomarNumerosDaLista ()
-{
-    for (int i = 0; i < listaDeNumeros.Count; i++)
+    Console.Clear();
+    ExibirTituloDaOpcao("Avaliar banda");
+    Console.Write("Digite o nome da banda que deseja avaliar: ");
+    string nomeDaBanda = Console.ReadLine()!;
+    if (bandasRegistradas.ContainsKey(nomeDaBanda))
     {
-        soma = soma + listaDeNumeros[i];
+        Console.Write($"Qual a nota que a banda {nomeDaBanda} merece? ");
+        int nota = int.Parse(Console.ReadLine()!);
+        bandasRegistradas[nomeDaBanda].Add(nota);
+        Console.WriteLine($"\nA nota {nota} foi registrada com sucesso para a banda {nomeDaBanda}.");
+        Thread.Sleep(2000);
+        Console.Clear();
+        ExibirOpcoesDoMenu();
+    } else
+    {
+        Console.WriteLine($"\nA banda {nomeDaBanda} não foi encontrada!");
+        Console.WriteLine("Digite uma tecla para voltar ao menu principal.");
+        Console.ReadKey();
+        Console.Clear();
+        ExibirOpcoesDoMenu();
     }
-    Console.WriteLine(soma);
 }
-SomarNumerosDaLista();
-*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-Console.Write("Digite a nota do aluno: ");
-int notaMedia = int.Parse(Console.ReadLine()!);
-
-if (notaMedia >= 5)
+void ExibirMediaDeBanda()
 {
-    Console.WriteLine("Nota suficiente para aprovação.");
+    Console.Clear();
+    ExibirTituloDaOpcao("Exibir média de banda");
+    Console.Write("Digite o nome da banda que deseja exibir a média: ");
+    string nomeDaBanda = Console.ReadLine()!;
+    if (bandasRegistradas.ContainsKey(nomeDaBanda))
+    {
+        /*
+        decimal somaDasNotas = 0;
+        foreach (int nota in bandasRegistradas[nomeDaBanda])
+        {
+            somaDasNotas += nota;
+        }
+        decimal mediaDasNotas = somaDasNotas / bandasRegistradas[nomeDaBanda].Count;
+        */
+
+        List<int> mediaDasNotas = bandasRegistradas[nomeDaBanda];
+
+        Console.WriteLine($"\nA média de notas da banda {nomeDaBanda} é de {mediaDasNotas.Average()}");
+        Console.WriteLine("Digite uma tecla para voltar ao menu principal.");
+        Console.ReadKey();
+        Console.Clear();
+        ExibirOpcoesDoMenu();
+    } else
+    {
+        Console.WriteLine($"\nA banda {nomeDaBanda} não foi encontrada!");
+        Console.WriteLine("Digite uma tecla para voltar ao menu principal.");
+        Console.ReadKey();
+        Console.Clear();
+        ExibirOpcoesDoMenu();
+    }
 }
-else
-{
-    Console.WriteLine("Aluno em recuperação.");
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-string curso = "Curso de C#";
-string nome = "Mateus";
-string sobrenome = "Ramgund";
-Console.WriteLine($"O aluno do curso " + curso + " se chama " + nome + " " + sobrenome);
-*/
